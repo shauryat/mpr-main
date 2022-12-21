@@ -17,30 +17,36 @@ function Widgets() {
       </div>
       <div className="sponsor_cont">
         <Card variant="outlined">
-          <img
-            src="https://download.logo.wine/logo/Ethereum/Ethereum-Logo.wine.png"
-            width="300"
-            height="200"
-          />
+          <a href="https://ethereum.org/en/">
+            <img
+              src="https://download.logo.wine/logo/Ethereum/Ethereum-Logo.wine.png"
+              width="300"
+              height="200"
+            />
+          </a>
         </Card>
         <br />
         <Card variant="outlined">
-          <img
-            src="https://assets-global.website-files.com/5f973c970bea5548ad4287ef/6088f4c7c34ad61ab10cdf72_horizontal-logo-onecolor-neutral-alchemy.svg"
-            width="300"
-            height="65"
-            style={{ margin: "15px" }}
-          />
+          <a href="https://www.alchemy.com/">
+            <img
+              src="https://assets-global.website-files.com/5f973c970bea5548ad4287ef/6088f4c7c34ad61ab10cdf72_horizontal-logo-onecolor-neutral-alchemy.svg"
+              width="300"
+              height="65"
+              style={{ margin: "15px" }}
+            />
+          </a>
         </Card>
         <br />
 
         <Card variant="outlined">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/c2/IPFS_logo.png"
-            width="300"
-            height="121"
-            style={{ margin: "15px" }}
-          />
+          <a href="https://ipfs.tech/">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c2/IPFS_logo.png"
+              width="300"
+              height="121"
+              style={{ margin: "15px" }}
+            />
+          </a>
         </Card>
       </div>
     </div>

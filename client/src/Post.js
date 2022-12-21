@@ -21,9 +21,9 @@ const Post = forwardRef(({ displayName, text, personal, onClick }, ref) => {
             <h3>{displayName} </h3>
           </div>
           <div className="post__headerDescription">
-            <p>{text.substr(0, 250)}</p>
-            <p style={{ fontSize: "30px", color: "orange" }}>
-              {text.length > 250 ? <p>...</p> : ""}
+            <p>{text.substr(0, 280)}</p>
+            <p style={{ fontSize: "20px", color: "orange" }}>
+              {text.length > 280 ? <p>... more</p> : ""}
             </p>
           </div>
         </div>
