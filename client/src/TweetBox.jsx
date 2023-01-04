@@ -10,11 +10,16 @@ import Twitter from "./utils/TwitterContract.json";
 
 function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState("");
+  const [tweetHeader, setTweetHeader] = useState("");
+  const [tweetImg, setTweetImg] = useState("");
   const [avatarOptions, setAvatarOptions] = useState("");
 
   const addTweet = async () => {
+    const mHeading = "<h1>" + tweetHeader + "</h1>";
+    const mImg = `<img src="${tweetImg}" width="400" height="400"/>`;
+    const fin = mHeading + mImg + "<br>" + tweetMessage;
     let tweet = {
-      tweetText: tweetMessage,
+      tweetText: fin,
       isDeleted: false,
     };
 
@@ -50,6 +55,8 @@ function TweetBox() {
     addTweet();
 
     setTweetMessage("");
+    setTweetHeader("");
+    setTweetImg("");
   };
 
   // Similar to componentDidMount and componentDidUpdate:
@@ -68,9 +75,25 @@ function TweetBox() {
             {...avatarOptions}
           />
           <input
+            onChange={(e) => setTweetHeader(e.target.value)}
+            value={tweetHeader}
+            placeholder="Heading"
+            // className="headingInput"
+            type="text"
+          />
+
+          <input
+            onChange={(e) => setTweetImg(e.target.value)}
+            value={tweetImg}
+            placeholder="imgUrl"
+            // className="imgInput"
+            type="text"
+          />
+
+          <input
             onChange={(e) => setTweetMessage(e.target.value)}
             value={tweetMessage}
-            placeholder="What's happening?"
+            placeholder="Content"
             type="text"
           />
         </div>

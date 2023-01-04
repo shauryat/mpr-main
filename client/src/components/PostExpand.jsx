@@ -116,7 +116,7 @@ const PostExpand = () => {
   const [mText, setText] = useState("LOADING ...");
 
   const fetchPostContent = async () => {
-    const ID = params.postId - 12;
+    const ID = params.postId - 21;
     const postContent = posts[ID];
     // console.log(postContent);
     const hmmm = await postContent.tweetText;
@@ -143,7 +143,7 @@ const PostExpand = () => {
       <Sidebar />
 
       <div className="marger">
-        <h4 dangerouslySetInnerHTML={{ __html: m }} />
+        <h4 dangerouslySetInnerHTML={{ __html: mText }} />
         <br />
         <h4 className="author">
           <i>Author : {params.user}</i>
