@@ -6,6 +6,7 @@ import { red } from "@material-ui/core/colors";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const Post = forwardRef(({ displayName, text, personal, onClick }, ref) => {
+  const mText = text.substr(0, 280);
   return (
     <div className="post" ref={ref}>
       <div className="post__avatar">
@@ -21,7 +22,7 @@ const Post = forwardRef(({ displayName, text, personal, onClick }, ref) => {
             <h3>{displayName} </h3>
           </div>
           <div className="post__headerDescription">
-            <p>{text.substr(0, 280)}</p>
+            <p dangerouslySetInnerHTML={{ __html: mText }} />
             <p style={{ fontSize: "20px", color: "orange" }}>
               {text.length > 280 ? <p>... more</p> : ""}
             </p>

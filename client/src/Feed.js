@@ -93,7 +93,7 @@ function Feed({ personal }) {
       console.log(error);
     }
   };
-
+  console.log(posts);
   return (
     <div className="feed">
       <div className="feed__header">
@@ -104,7 +104,7 @@ function Feed({ personal }) {
 
       <FlipMove>
         {posts.map((post) => (
-          <Link to={`post/${post.id}/${post.username}/${post.tweetText}`}>
+          <Link to={`post/${post.id}/${post.username}/`}>
             <Post
               key={post.id}
               displayName={post.username}

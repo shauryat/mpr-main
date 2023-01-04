@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "post/:postId/:user/:content",
+    path: "post/:postId/:user/",
     element: <PostExpand />,
   },
   {

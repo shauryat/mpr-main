@@ -1,7 +1,4 @@
-import React from "react";
-
-import Avatar from "avataaars";
-import { generateRandomAvatarOptions } from "../avatar";
+import React, { useState, useEffect } from "react";
 
 import { useParams, Link } from "react-router-dom";
 import Sidebar from "../Sidebar";
@@ -15,6 +12,10 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+
+import { TwitterContractAddress } from "../config.js";
+import { ethers } from "ethers";
+import Twitter from "../utils/TwitterContract.json";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -41,6 +42,8 @@ const PostExpand = () => {
     setOpen(false);
   };
 
+  // const mContent = linkify(params.content);
+
   const action = (
     <React.Fragment>
       <IconButton
@@ -54,12 +57,93 @@ const PostExpand = () => {
     </React.Fragment>
   );
 
+  const [posts, setPosts] = useState([]);
+
+  const getUpdatedTweets = (allTweets, address) => {
+    let updatedTweets = [];
+    // Here we set a personal flag around the tweets
+    for (let i = 0; i < allTweets.length; i++) {
+      if (allTweets[i].username.toLowerCase() == address.toLowerCase()) {
+        let tweet = {
+          id: allTweets[i].id,
+          tweetText: allTweets[i].tweetText,
+          isDeleted: allTweets[i].isDeleted,
+          username: allTweets[i].username,
+          personal: true,
+        };
+        updatedTweets.push(tweet);
+      } else {
+        let tweet = {
+          id: allTweets[i].id,
+          tweetText: allTweets[i].tweetText,
+          isDeleted: allTweets[i].isDeleted,
+          username: allTweets[i].username,
+          personal: false,
+        };
+        updatedTweets.push(tweet);
+      }
+    }
+    return updatedTweets;
+  };
+
+  const getAllTweets = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const TwitterContract = new ethers.Contract(
+          TwitterContractAddress,
+          Twitter.abi,
+          signer
+        );
+
+        let allTweets = await TwitterContract.getAllTweets();
+        setPosts(getUpdatedTweets(allTweets, ethereum.selectedAddress));
+      } else {
+        console.log("Ethereum object doesn't exist");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllTweets();
+  }, []);
+
+  const [mText, setText] = useState("LOADING ...");
+
+  const fetchPostContent = async () => {
+    const ID = params.postId - 12;
+    const postContent = posts[ID];
+    // console.log(postContent);
+    const hmmm = await postContent.tweetText;
+    setText(hmmm);
+
+    console.log(hmmm);
+  };
+
+  fetchPostContent();
+
+  const linkify = (text) => {
+    var urlRegex =
+      /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+
+    return text.replace(urlRegex, function (url) {
+      return '<a href="' + url + '">' + url + "</a>";
+    });
+  };
+
+  const m = linkify(mText);
+
   return (
     <div className="container">
       <Sidebar />
 
       <div className="marger">
-        <h4>{params.content}</h4>
+        <h4 dangerouslySetInnerHTML={{ __html: m }} />
         <br />
         <h4 className="author">
           <i>Author : {params.user}</i>
