@@ -168,13 +168,6 @@ const PostExpand = () => {
             horizontal: "left",
           }}
         />
-        {/* <div className="post__avatar">
-        <Avatar
-          style={{ width: "100px", height: "100px" }}
-          avatarStyle="Circle"
-          {...generateRandomAvatarOptions()}
-        />
-      </div> */}
       </div>
     </div>
   );

@@ -107,7 +107,7 @@ function PersonalFeed({ personal }) {
         {posts
           .filter((post) => post.personal === true)
           .map((post) => (
-            <Link to={`/post/${post.id}/${post.username}/${post.tweetText}`}>
+            <Link to={`/post/${post.id}/${post.username}/`}>
               <Post
                 key={post.id}
                 displayName={post.username}

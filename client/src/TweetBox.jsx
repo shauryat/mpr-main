@@ -15,8 +15,10 @@ function TweetBox() {
   const [avatarOptions, setAvatarOptions] = useState("");
 
   const addTweet = async () => {
-    const mHeading = "<h1>" + tweetHeader + "</h1>";
-    const mImg = `<img src="${tweetImg}" width="400" height="400"/>`;
+    const mHeading = tweetHeader ? "<h1>" + tweetHeader + "</h1>" : "";
+    const mImg = tweetImg
+      ? `<img src="${tweetImg}" width="400" height="400"/>`
+      : "";
     const fin = mHeading + mImg + "<br>" + tweetMessage;
     let tweet = {
       tweetText: fin,
